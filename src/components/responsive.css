@@ -1,0 +1,64 @@
+
+:root {
+    --container-max-with-1366: 1024px;
+    --container-max-with-1920: 1680px;
+}
+
+.container{
+    position: relative;
+    max-width: var(--container-max-with-1366);
+    margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+}
+.sideblock{
+    width: 280px;
+}
+.maincontent{
+    flex: 1;
+    margin-left: 20px;
+}
+@media (min-width: 1720px) {
+    .container{
+        max-width: var(--container-max-with-1920);
+    }
+}
+.brick{
+    display: block;
+    background: #fff;
+    padding: 8.87px;
+    -webkit-box-shadow: 0px 2px 12px 3px rgba(204,204,204,0.58);
+    -moz-box-shadow: 0px 2px 12px 3px rgba(204,204,204,0.58);
+    box-shadow: 0px 2px 12px 3px rgba(204,204,204,0.58);
+}
+.brick + .brick{
+    margin-top: 20px;
+}
+.responsive-image{
+    width: 100%;
+    height: auto;
+}
+.side-menu{
+    font-size: .8em;
+}
+.side-menu::before{
+    content: " ";
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    background-size: 1em auto;
+    background-position: center center;
+    background-repeat: no-repeat;
+    vertical-align: baeline;
+    margin-right: .5em;
+}
+.github-side::before{
+    background-image: url(../images/github.png);
+}
+.comp-side::before{
+    background-image: url(../images/comp.png);
+}
+.author-meta{
+    font-size: 1.4em;
+    font-family: Impact, fantasy;
+}

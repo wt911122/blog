@@ -1,0 +1,92 @@
+
+  .generate-delays(12);
+
+  .generate-delays(@n, @i: 1) when (@i =< @n) {
+    .delay-@{i},
+    .delay-@{i}::after,
+    .delay-@{i}::before{
+      animation-delay: (@i * .3s);
+    }
+    .generate-delays(@n, (@i + 1));
+  }
+
+  .letter{
+    font-family: Comic Sans, Comic Sans MS, cursive;
+    font-size: 36px;
+    display: inline-block;
+    width: 1.5em;
+    height: 1.5em;
+    position: relative;
+    line-height: 1.5em;
+    text-align: center;
+    padding: 0;
+    animation-name: joggle ;
+    animation-duration: .5s ;
+    animation-timing-function: ease-in;
+    border-color: transparent;
+  }
+  .letter::after {
+    content:' ';
+    display: block;
+    width: 1.5em;
+    height: 1.5em;
+    position: absolute;
+    left:0;
+    top: 0;
+    border: 2px solid #000;
+    border-radius: 100%;
+    animation-name: expand ;
+    animation-duration: .25s ;
+    animation-timing-function: ease-out;
+    border-color: transparent;
+  }
+  .letter::before {
+    content:' ';
+    display: block;
+    width: .9em;
+    height: .9em;
+    position: absolute;
+    left: .3em;
+    top: .3em;
+    background: #fff;
+    border-radius: 100%;
+
+    transform: scale(0);
+    animation-name: shrink;
+    animation-duration: .25s ;
+    animation-timing-function: ease-out;
+  }
+  @keyframes expand {
+    from {
+      transform: scale(0.8);
+        border-color: #fff;
+    }
+
+    to {
+      transform: scale(1);
+      border-color: #fff;
+    }
+  }
+  @keyframes shrink {
+    from {
+      transform: scale(1)
+    }
+
+    to {
+      transform: scale(0)
+    }
+  }
+  @keyframes joggle{
+    0% {
+      transform: rotate(24deg)
+    }
+    65%{
+      transform: rotate(-12deg)
+    }
+    92%{
+      transform: rotate(6deg)
+    }
+    100% {
+      transform: rotate(0)
+    }
+  }
