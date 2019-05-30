@@ -6,6 +6,7 @@ module.exports = {
     github: `https://github.com/wt911122`,
     comp: `Netease`,
   },
+  pathPrefix:'/blog',
   plugins: [
     `gatsby-plugin-react-helmet`,
     {
