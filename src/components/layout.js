@@ -13,7 +13,7 @@ import Header from "./header"
 import "./layout.css"
 import "./responsive.css"
 
-const Layout = ({ children }) => (
+const Layout = ({ children, noSideBar, headercontent, headerdate }) => (
   <StaticQuery
     query={graphql`
       query SiteTitleQuery {
@@ -30,11 +30,11 @@ const Layout = ({ children }) => (
     `}
     render={data => (
       <>
-        <Header siteTitle={ data.site.siteMetadata.title } siteDescription={data.site.siteMetadata.description}/>
+        <Header siteTitle={ headercontent || data.site.siteMetadata.title } siteDescription={headerdate || data.site.siteMetadata.description}/>
         <div className="container" style={{
 
         }}>
-          <aside className="sideblock">
+          {!noSideBar && <aside className="sideblock">
             {/* profile */}
             <div className="brick">
               <img className="responsive-image" src="https://avatars1.githubusercontent.com/u/7549134?s=460&v=4"/>
@@ -46,7 +46,7 @@ const Layout = ({ children }) => (
                 <li className="side-menu comp-side">{data.site.siteMetadata.comp}</li>
               </dl>
             </div>
-          </aside>
+          </aside>}
           <div className="maincontent">
             {children}
           </div>

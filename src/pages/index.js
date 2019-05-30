@@ -1,50 +1,81 @@
-import React from "react"
+import React ,{ useState } from 'react';
 import { Link } from "gatsby"
 
 import Layout from "../components/layout"
 import Image from "../components/image"
 import SEO from "../components/seo"
+import SectionPage from '../components/section';
 
+import 'gitment/style/default.css'
+import Gitment from 'gitment';
 
-const IndexPage = ({ data }) => {
-    const edges = data.allMarkdownRemark.edges;
+class IndexPage extends React.Component{
+  componentDidMount() {
+    const gitment = new Gitment({
+      // id: 'Your page ID', // optional
+      owner: 'wt911122',
+      repo: 'blog',
+      oauth: {
+        client_id: '452663934@qq.com',
+        client_secret: 'zbj650519',
+      },
+      // ...
+      // For more available options, check out the documentation below
+    });
+    gitment.render('comments')
+  }
+  render(){
+    const edges = this.props.data.allMarkdownRemark.edges;
+
     return (
       <Layout>
         <SEO title="Home" keywords={[`gatsby`, `application`, `react`]} />
         {edges.map(edge => {
           return(
-            <section className="brick" style={{padding: '10px 20px'}}>
-              <div style={{
-                fontSize: '.8em',
-                fontFamily: 'Arial, sans-serif',
-                color: '#7a7a8c',
-                textAlign: 'left'
-              }}>{new Intl.DateTimeFormat('zh-cn', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'}).format(new Date(edge.node.frontmatter.date))}</div>
-              <h1 style={{
-                margin: '.4em 0 1em',
-                fontFamily: 'Rubik,Lato,"Lucida Grande","Lucida Sans Unicode",Tahoma,Sans-Serif'
-              }}>{edge.node.frontmatter.title}</h1>
-              <p style={{
-                fontFamily: 'Microsoft Yahei,Tahoma,Helvetica,Arial,sans-serif'
-              }}>{edge.node.excerpt}</p>
-            </section>)
+            <SectionPage key={edge.node.id} edge={edge}/>
+            )
         })}
       </Layout>
     )
   }
+}
+// const IndexPage = ({ data }) => {
+//     const edges = data.allMarkdownRemark.edges;
+
+//     return (
+//       <Layout>
+//         <SEO title="Home" keywords={[`gatsby`, `application`, `react`]} />
+//         {edges.map(edge => {
+//           return(
+//             <SectionPage key={edge.node.id} edge={edge}/>
+//             )
+//         })}
+//       </Layout>
+//     )
+//   }
 
 export default IndexPage
 
 export const pageQuery = graphql`
   query{
-    allMarkdownRemark{
+    allMarkdownRemark(
+      sort: {
+        fields: [frontmatter___date]
+        order: DESC
+      }
+    ){
       totalCount
+      pageInfo{
+        hasNextPage
+      }
       edges{
         node{
+          id
           frontmatter{
             title
             date
             author
+            path
           }
           excerpt
         }

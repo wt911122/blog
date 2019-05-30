@@ -17,6 +17,7 @@
 .maincontent{
     flex: 1;
     margin-left: 20px;
+    width: 100%;
 }
 @media (min-width: 1720px) {
     .container{
@@ -24,8 +25,13 @@
     }
 }
 .brick{
+    width: 100%;
+    transition:0.6s cubic-bezier(0.01, 1.69, 0.99, 0.94);
     display: block;
+    margin: auto;
     background: #fff;
+    border: 1px solid transparent;
+    border-radius: 0;
     padding: 8.87px;
     -webkit-box-shadow: 0px 2px 12px 3px rgba(204,204,204,0.58);
     -moz-box-shadow: 0px 2px 12px 3px rgba(204,204,204,0.58);
@@ -33,6 +39,13 @@
 }
 .brick + .brick{
     margin-top: 20px;
+}
+.brick h1{
+    transition: all .6s;
+    text-align: center;
+}
+.brick:hover h1{
+    letter-spacing: 2px;
 }
 .responsive-image{
     width: 100%;
@@ -61,4 +74,10 @@
 .author-meta{
     font-size: 1.4em;
     font-family: Impact, fantasy;
+}
+a{
+    color: lightseagreen;
+}
+a:active{
+    color: cornflowerblue;
 }
